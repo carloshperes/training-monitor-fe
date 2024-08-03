@@ -1,101 +1,109 @@
 <template>
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative shadow-md sm:rounded-lg">
     <div class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
-        <div>
-            <button 
-                @click="toggleDropdownCourses" 
-                class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" 
-                type="button">
-                Cursos
-                <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div v-if="isDropdownCoursesOpen" class="z-10 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200">
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate account</a>
-                    </li>
-                </ul>
-                <div class="py-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete User</a>
+        <div class="w-screen">
+            <div @click="toggleDropdownCourses" class="relative w-full h-12 border p-2 rounded cursor-pointer">
+                <div class="px-2">
+                    <span class="float-left" v-if="!selectedOptions.length">Cursos</span>
+                    <svg class="w-4 mt-1 float-right" :class="{ selectedOptions, 'mt-2': true }" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+                <div v-if="selectedOptions.length" class="flex flex-wrap">
+                    <span v-for="option in selectedOptions" :key="option" class="bg-gray-100 px-2 py-1 rounded mr-1">
+                        Selecione
+                    </span>
                 </div>
             </div>
-        </div>
-        <label for="table-search" class="sr-only">Search</label>
-        <div class="relative">
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
+
+            <div v-if="isDropdownCoursesOpen" class="absolute z-10 mt-2 w-full bg-white border rounded shadow-lg">
+            <div class="p-3">
+                <label>
+                    <input type="checkbox" @change="selectAll" :checked="allSelected" /> Todos
+                </label>
             </div>
-            <input type="text" id="table-search-users" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for users">
+            <div class="px-3 pb-3 max-h-40 overflow-y-auto space-y-2">
+                <div v-for="option in options" :key="option" class="flex items-center">
+                    <input
+                        type="checkbox"
+                        :value="option"
+                        @change="toggleOption(option)"
+                        :checked="selectedOptions.includes(option)"
+                    />
+                    <span class="ml-2">{{ option }}</span>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
+    <div class="overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-white uppercase bg-violet-900 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th class="px-6 py-3">
                     Nome
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th class="px-6 py-3">
                     Curso
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th class="px-6 py-3">
                     Progresso
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th class="px-6 py-3">
                     Nota
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Jese image">
+                <th class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Carlos Peres">
                     <div class="ps-3">
-                        <div class="text-base font-semibold">Neil Sims</div>
-                        <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                        <div class="text-base font-semibold">Carlos Peres</div>
+                        <div class="font-normal text-gray-500">carlos@carlos.com</div>
                     </div>  
                 </th>
                 <td class="px-6 py-4">
-                    React Developer
+                    PHP 8
                 </td>
                 <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                    <div>
+                        <div class="inline-block mb-2 ms-[calc(50%-1.25rem)] py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">
+                            50%
+                        </div>
+                        <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700">
+                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 50%"></div>
+                        </div>
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <h3 class="ftext-base font-semibold text-lg text-green-600">9 / 10</h3>
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Jese image">
                     <div class="ps-3">
-                        <div class="text-base font-semibold">Bonnie Green</div>
-                        <div class="font-normal text-gray-500">bonnie@flowbite.com</div>
+                        <div class="text-base font-semibold">
+                            Pâmela Peres
+                        </div>
+                        <div class="font-normal text-gray-500">pamela@pamela.com</div>
                     </div>
                 </th>
                 <td class="px-6 py-4">
-                    Designer
+                    Vue 3
                 </td>
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
+                <td class="px-6 py-4"> 
+                    <div>
+                        <div class="inline-block mb-2 ms-[calc(25%-1.25rem)] py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">25%</div>
+                        <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 25%"></div>
+                        </div>
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit user</a>
+                    <h3 class="ftext-base font-semibold text-lg">- / 10</h3>
                 </td>
             </tr>
             <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -160,6 +168,7 @@
             </tr> -->
         </tbody>
     </table>
+    </div>
 </div>
 
 </template>
@@ -170,4 +179,28 @@ const isDropdownCoursesOpen = ref(false)
 const toggleDropdownCourses = () => {
     isDropdownCoursesOpen.value = !isDropdownCoursesOpen.value
 }
+
+const options = ['PHP 8', 'Laravel', 'Vue 3',];
+const selectedOptions = ref([]);
+
+const toggleOption = (option) => {
+  if (selectedOptions.value.includes(option)) {
+    selectedOptions.value = selectedOptions.value.filter((o) => o !== option);
+  } else {
+    selectedOptions.value.push(option);
+  }
+};
+
+const selectAll = (event) => {
+  if (event.target.checked) {
+    selectedOptions.value = [...options];
+  } else {
+    selectedOptions.value = [];
+  }
+};
+
+const allSelected = ref(false);
+watch(selectedOptions, () => {
+  allSelected.value = selectedOptions.value.length === options.length;
+});
 </script>

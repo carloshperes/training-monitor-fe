@@ -1,75 +1,51 @@
 <template>
     <div>
-        <header class="bg-purple-900 text-white">
-            <div class=" mx-2 flex items-center justify-between p-4">
-                <div class="flex items-center">
+        <nav class="bg-purple-700 text-white border-gray-200 dark:bg-gray-900">
+            <div class="max-w-screen flex items-center p-4">
+                <div class="flex grow items-center">
                     <img src="https://randompicturegenerator.com/img/dog-generator/g4919b178b996e333e3118deaa5f7d20b662cb886a3227cf4c82bbe72676df21b1aa0e696c97d5b370023af456563c3f6_640.jpg" alt="Logo" class="w-10 h-10 rounded-full">
                     <span class="ml-4 text-xl font-bold">Traning Watch</span>
                 </div>
-                <nav class="flex items-center space-x-6 right">
-                    <NuxtLink to="dashboard">Dashboard</NuxtLink>
-
-                    <div class="block lg:flex items-center relative cursor-pointer navbar-item-label-active dark:text-white dark:hover:text-slate-400 lg:py-2 lg:px-3">
-                        <div @click="toggleDropdown" class="flex items-center bg-gray-100 dark:bg-slate-800 lg:bg-transparent lg:dark:bg-transparent p-3 lg:p-0">
-                            <div class="w-6 h-6 mr-3 inline-flex">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="John Doe" class="rounded-full block h-auto w-full max-w-full bg-gray-100 dark:bg-slate-800">
-                            </div><!---->
-                            <span class="px-2 transition-colors">Gerente</span>
-                            <span class="inline-flex justify-center items-center w-6 h-6 hidden lg:inline-flex transition-colors">
-                                <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                    <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div v-if="isDropdownOpen" class="text-sm text-black border-b border-gray-100 lg:border lg:bg-white lg:absolute lg:top-full lg:left-0 lg:min-w-full lg:z-20 lg:shadow-lg lg:dark:bg-slate-800 dark:border-slate-700 mt-3">
-                            <a class="block lg:flex items-center relative cursor-pointer navbar-item-label dark:text-white dark:hover:text-slate-400 py-2 px-3">
-                                <div class="flex items-center"><!---->
-                                    <span class="inline-flex justify-center items-center w-6 h-6 transition-colors">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                            <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="px-2 transition-colors">My Profile</span><!---->
-                                </div><!---->
+                <div class="flex gap-6 items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    
+                    <ul class="flex-col hidden md:block p-4 md:p-0 border-gray-100 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <li>
+                            <a href="#" class="block py-2 px-3 rounded hover:font-medium md:bg-transparent md:text-white md:p-0 md:dark:text-white">
+                                Dashboard
                             </a>
-                            <div class="block lg:flex items-center relative cursor-pointer navbar-item-label dark:text-white dark:hover:text-slate-400 py-2 px-3">
-                                <div class="flex items-center"><!---->
-                                    <span class="inline-flex justify-center items-center w-6 h-6 transition-colors">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                            <path fill="currentColor" d="M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8M12,10A2,2 0 0,0 10,12A2,2 0 0,0 12,14A2,2 0 0,0 14,12A2,2 0 0,0 12,10M10,22C9.75,22 9.54,21.82 9.5,21.58L9.13,18.93C8.5,18.68 7.96,18.34 7.44,17.94L4.95,18.95C4.73,19.03 4.46,18.95 4.34,18.73L2.34,15.27C2.21,15.05 2.27,14.78 2.46,14.63L4.57,12.97L4.5,12L4.57,11L2.46,9.37C2.27,9.22 2.21,8.95 2.34,8.73L4.34,5.27C4.46,5.05 4.73,4.96 4.95,5.05L7.44,6.05C7.96,5.66 8.5,5.32 9.13,5.07L9.5,2.42C9.54,2.18 9.75,2 10,2H14C14.25,2 14.46,2.18 14.5,2.42L14.87,5.07C15.5,5.32 16.04,5.66 16.56,6.05L19.05,5.05C19.27,4.96 19.54,5.05 19.66,5.27L21.66,8.73C21.79,8.95 21.73,9.22 21.54,9.37L19.43,11L19.5,12L19.43,13L21.54,14.63C21.73,14.78 21.79,15.05 21.66,15.27L19.66,18.73C19.54,18.95 19.27,19.04 19.05,18.95L16.56,17.95C16.04,18.34 15.5,18.68 14.87,18.93L14.5,21.58C14.46,21.82 14.25,22 14,22H10M11.25,4L10.88,6.61C9.68,6.86 8.62,7.5 7.85,8.39L5.44,7.35L4.69,8.65L6.8,10.2C6.4,11.37 6.4,12.64 6.8,13.8L4.68,15.36L5.43,16.66L7.86,15.62C8.63,16.5 9.68,17.14 10.87,17.38L11.24,20H12.76L13.13,17.39C14.32,17.14 15.37,16.5 16.14,15.62L18.57,16.66L19.32,15.36L17.2,13.81C17.6,12.64 17.6,11.37 17.2,10.2L19.31,8.65L18.56,7.35L16.15,8.39C15.38,7.5 14.32,6.86 13.12,6.62L12.75,4H11.25Z"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="px-2 transition-colors">Settings</span><!---->
-                                </div><!---->
-                            </div>
-                            <div class="block lg:flex items-center relative cursor-pointer navbar-item-label dark:text-white dark:hover:text-slate-400 py-2 px-3">
-                                <div class="flex items-center"><!---->
-                                    <span class="inline-flex justify-center items-center w-6 h-6 transition-colors">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                            <path fill="currentColor" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="px-2 transition-colors">Messages</span><!---->
-                                </div><!---->
-                            </div>
-                            <hr class="hidden lg:block lg:my-0.5 dark:border-slate-700 border-t border-gray-100">
-                            <NuxtLink to="/">
-                            <div class="block lg:flex items-center relative cursor-pointer navbar-item-label dark:text-white dark:hover:text-slate-400 py-2 px-3">
-                                <div class="flex items-center"><!---->
-                                    <span class="inline-flex justify-center items-center w-6 h-6 transition-colors">
-                                        <svg viewBox="0 0 24 24" width="16" height="16" class="inline-block">
-                                            <path fill="currentColor" d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="px-2 transition-colors">Log Out</span><!---->
-                                </div><!---->
-                            </div>
-                            </NuxtLink>
+                        </li>
+                    </ul>
+                    <button @click="toggleNavbar" type="button" class="flex text-sm bg-gray-800 shrink-0 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <img class="w-8 h-8 rounded-full" src="https://api.dicebear.com/7.x/avataaars/svg?seed=doe-doe-doe-example-com" alt="user photo">
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div 
+                        v-if="navbarOpen" 
+                        class="absolute top-12 right-1 z-50 my-4 w-[200px] text-base lg-hidden list-none bg-white divide-y divide-gray-100 rounded-sm shadow dark:bg-gray-700 dark:divide-gray-600">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">Carlos Peres</span>
+                            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">carlos@carlos.com</span>
                         </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            <NuxtLink to="/">
+                                <li class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                    Sair
+                                </li>
+                            </NuxtLink>
+                        </ul>
                     </div>
-                </nav>
+                    <button 
+                        @click="toggleDropdown"
+                        type="button" 
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 hover:text-purple-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </header>
+        </nav>
+        
         <main class="p-4">
             <slot />
         </main>
@@ -77,10 +53,15 @@
 </template>
 
 <script setup>
-const isDropdownOpen = ref(false)
+const navbarOpen = ref(false)
+const dropdownOpen = ref(false)
+
+const toggleNavbar = () => {
+  navbarOpen.value = !navbarOpen.value
+}
 
 const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value
+  dropdownOpen.value = !dropdownOpen.value
 }
 </script>
 
