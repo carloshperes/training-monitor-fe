@@ -20,9 +20,11 @@
                     <label for="password" class="block text-gray-700">Password</label>
                     <input type="password" id="password" v-model="password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
                 </div>
-                <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-300">
-                    Log In
-                </button>
+                <NuxtLink to="dashboard">
+                    <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-300">
+                        Log In
+                    </button>
+                </NuxtLink>
             </form>
         </div>
     </div>

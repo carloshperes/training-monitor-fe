@@ -53,6 +53,7 @@
                                 </div><!---->
                             </div>
                             <hr class="hidden lg:block lg:my-0.5 dark:border-slate-700 border-t border-gray-100">
+                            <NuxtLink to="/">
                             <div class="block lg:flex items-center relative cursor-pointer navbar-item-label dark:text-white dark:hover:text-slate-400 py-2 px-3">
                                 <div class="flex items-center"><!---->
                                     <span class="inline-flex justify-center items-center w-6 h-6 transition-colors">
@@ -63,6 +64,7 @@
                                     <span class="px-2 transition-colors">Log Out</span><!---->
                                 </div><!---->
                             </div>
+                            </NuxtLink>
                         </div>
                     </div>
                 </nav>
@@ -75,8 +77,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 const isDropdownOpen = ref(false)
 
 const toggleDropdown = () => {
