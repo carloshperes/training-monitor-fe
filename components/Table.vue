@@ -24,7 +24,7 @@
                 </label>
             </div>
             <div class="px-3 pb-3 max-h-40 overflow-y-auto space-y-2">
-                <div v-for="option in options" :key="option" class="flex items-center">
+                <div v-for="option in options" :key="option" class="flex items-center hover:bg-gray-200">
                     <input
                         type="checkbox"
                         :value="option"

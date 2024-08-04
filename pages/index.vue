@@ -1,3 +1,24 @@
+<script setup>
+definePageMeta({
+    layout:     'guest',
+    middleware: ['guest']
+});
+
+const form = ref({
+    email:      "test@example.com",
+    password:   'password'
+});
+
+const authStore = useAuthStore();
+
+const handleLogin = async () => {
+    
+    await authStore.login(form.value);
+
+}
+
+</script>
+
 <template>
     <div class="flex w-full h-600 max-w-5xl bg-white shadow-md overflow-hidden">
         <!-- Lateral esquerda com a imagem de fundo e o texto -->
@@ -11,46 +32,22 @@
         <!-- Formulário de login -->
         <div class="w-1/2 p-8">
             <h2 class="text-2xl font-bold text-center mb-8">Login</h2>
-            <form @submit.prevent="login">
+            <form @submit.prevent="handleLogin">
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700">Email</label>
-                    <input type="email" id="email" v-model="email" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    <label class="block text-gray-700">Email</label>
+                    <input type="text" v-model="form.email" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-gray-700">Password</label>
-                    <input type="password" id="password" v-model="password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                    <label class="block text-gray-700">Password</label>
+                    <input type="password" v-model="form.password" class="mt-1 block w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
                 </div>
-                <NuxtLink to="dashboard">
-                    <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-300">
-                        Log In
-                    </button>
-                </NuxtLink>
+                <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition duration-300">
+                    Logar
+                </button>
             </form>
         </div>
     </div>
 </template>
-
-<script>
-definePageMeta({
-    layout: 'guest'
-});
-
-export default {
-    data() {
-        return {
-        email: '',
-        password: ''
-        };
-    },
-    methods: {
-        login() {
-        // lógica de login aqui
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
-        }
-    }
-};
-</script>
 
 <style scoped>
 </style>

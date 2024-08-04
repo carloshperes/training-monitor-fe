@@ -1,3 +1,21 @@
+<script setup>
+const navbarOpen = ref(false)
+const dropdownOpen = ref(false)
+
+const toggleNavbar = () => {
+  navbarOpen.value = !navbarOpen.value
+}
+
+const toggleDropdown = () => {
+  dropdownOpen.value = !dropdownOpen.value
+}
+
+const logout = () => {
+    const store = useAuthStore();
+    store.logout();
+}
+</script>
+
 <template>
     <div>
         <nav class="bg-purple-700 text-white border-gray-200 dark:bg-gray-900">
@@ -27,11 +45,9 @@
                             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">carlos@carlos.com</span>
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
-                            <NuxtLink to="/">
-                                <li class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                                    Sair
-                                </li>
-                            </NuxtLink>
+                            <li @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                Sair
+                            </li>
                         </ul>
                     </div>
                     <button 
@@ -51,19 +67,6 @@
         </main>
     </div>
 </template>
-
-<script setup>
-const navbarOpen = ref(false)
-const dropdownOpen = ref(false)
-
-const toggleNavbar = () => {
-  navbarOpen.value = !navbarOpen.value
-}
-
-const toggleDropdown = () => {
-  dropdownOpen.value = !dropdownOpen.value
-}
-</script>
 
 <style scoped>
 </style>
