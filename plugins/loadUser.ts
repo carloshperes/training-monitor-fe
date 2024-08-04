@@ -6,6 +6,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
         await store.fetchUser();
 
+        navigateTo('dashboard');
+
     } catch(exception) {
 
         console.log(exception);

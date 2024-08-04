@@ -15,6 +15,8 @@ const handleLogin = async () => {
     
     await authStore.login(form.value);
 
+    navigateTo('/');
+
 }
 
 </script>
