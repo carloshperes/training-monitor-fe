@@ -1,10 +1,12 @@
-export default defineNuxtPlugin(async (nuxtApp) => {
-    
-    const store = useAuthStore();
+import actions from '~/actions';
+
+export default defineNuxtPlugin(async () => {
+
+    console.log('Plugin carregado')
 
     try {
 
-        await store.fetchUser();
+        actions.auth.fetchUser();
 
         navigateTo('dashboard');
 

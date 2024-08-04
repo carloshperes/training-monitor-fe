@@ -1,4 +1,6 @@
 <script setup>
+import actions from '~/actions';
+
 definePageMeta({
     layout:     'guest',
     middleware: ['guest']
@@ -9,13 +11,9 @@ const form = ref({
     password:   'password'
 });
 
-const authStore = useAuthStore();
-
 const handleLogin = async () => {
-    
-    await authStore.login(form.value);
 
-    navigateTo('/');
+    await actions.auth.login(form);
 
 }
 

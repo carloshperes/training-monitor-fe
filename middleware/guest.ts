@@ -1,8 +1,12 @@
 export default defineNuxtRouteMiddleware(() => {
+
+    console.log('Middleware guest carregado')
     
-    const auth          = useAuthStore();
+    const auth = useAuthStore();
+
+    console.log('Is logged: '+ auth.isLoggedIn);
 
     if(auth.isLoggedIn){
-        return navigateTo('/dashboard');
+        navigateTo('dashboard');
     }
 })

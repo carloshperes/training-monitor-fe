@@ -1,4 +1,6 @@
 <script setup>
+import actions from '~/actions';
+
 const navbarOpen = ref(false)
 const dropdownOpen = ref(false)
 
@@ -11,8 +13,7 @@ const toggleDropdown = () => {
 }
 
 const logout = () => {
-    const store = useAuthStore();
-    store.logout();
+    actions.auth.logout();
 }
 </script>
 
