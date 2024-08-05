@@ -1,3 +1,80 @@
+<script setup>
+import actions from '~/actions';
+
+const isDropdownCoursesOpen = ref(false)
+
+const toggleDropdownCourses = () => {
+    isDropdownCoursesOpen.value = !isDropdownCoursesOpen.value
+}
+
+const options = ['PHP 8', 'Laravel', 'Vue 3',];
+const selectedOptions = ref([]);
+
+const toggleOption = (option) => {
+  if (selectedOptions.value.includes(option)) {
+    selectedOptions.value = selectedOptions.value.filter((o) => o !== option);
+  } else {
+    selectedOptions.value.push(option);
+  }
+};
+
+const selectAll = (event) => {
+  if (event.target.checked) {
+    selectedOptions.value = [...options];
+  } else {
+    selectedOptions.value = [];
+  }
+};
+
+const allSelected = ref(false);
+watch(selectedOptions, () => {
+  allSelected.value = selectedOptions.value.length === options.length;
+});
+
+
+
+const employees = ref([]);
+const page = ref(1);
+const perPage = ref(10);
+const loading = ref(false);
+const hasMore = ref(true);
+
+const loadCourses = async () => {
+    if (loading.value || !hasMore.value) return;
+
+        loading.value = true;
+    try {
+        await actions.courseEmployee.fetch(page.value);
+
+        employees.value.push(...store.courses.data);
+        hasMore.value = store.courses.data.length === perPage.value;
+        page.value++;
+
+    } catch (error) {
+        if (error) {
+
+}
+        console.error("Erro ao carregar os funcionários:", error);
+    } finally {
+        loading.value = false;
+    }
+
+};
+
+const onScroll = () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && hasMore.value) {
+        loadCourses();
+    }
+};
+
+onMounted(() => {
+    loadCourses();
+    window.addEventListener('scroll', onScroll);
+});
+const store     = useCourseEmployeeStore();
+const courses   = computed(() => store.courses)
+</script>
+
 <template>
 
 <div class="relative shadow-md sm:rounded-lg">
@@ -56,54 +133,29 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr v-for="course in employees" :key="course.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-1.jpg" alt="Carlos Peres">
+                    <img class="w-10 h-10 rounded-full" :src="course.employees.avatar" alt="Carlos Peres">
                     <div class="ps-3">
-                        <div class="text-base font-semibold">Carlos Peres</div>
-                        <div class="font-normal text-gray-500">carlos@carlos.com</div>
+                        <div class="text-base font-semibold">{{ course.employees.name }}</div>
+                        <div class="font-normal text-gray-500">{{ course.employees.position }}</div>
                     </div>  
                 </th>
                 <td class="px-6 py-4">
-                    PHP 8
+                    {{ course.courses.name }}
                 </td>
                 <td class="px-6 py-4">
                     <div>
-                        <div class="inline-block mb-2 ms-[calc(50%-1.25rem)] py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">
-                            50%
+                        <div :class="'inline-block mb-2 ms-[calc(50%-1.25rem)] py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500'">
+                            {{  course.progress + '%'  }}
                         </div>
                         <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700">
-                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 50%"></div>
+                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" :style="'width: ' + course.progress + '%'"></div>
                         </div>
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <h3 class="ftext-base font-semibold text-lg text-green-600">9 / 10</h3>
-                </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <img class="w-10 h-10 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">
-                            Pâmela Peres
-                        </div>
-                        <div class="font-normal text-gray-500">pamela@pamela.com</div>
-                    </div>
-                </th>
-                <td class="px-6 py-4">
-                    Vue 3
-                </td>
-                <td class="px-6 py-4"> 
-                    <div>
-                        <div class="inline-block mb-2 ms-[calc(25%-1.25rem)] py-0.5 px-1.5 bg-blue-50 border border-blue-200 text-xs font-medium text-blue-600 rounded-lg dark:bg-blue-800/30 dark:border-blue-800 dark:text-blue-500">25%</div>
-                        <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-neutral-700" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            <div class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500" style="width: 25%"></div>
-                        </div>
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                    <h3 class="ftext-base font-semibold text-lg">- / 10</h3>
+                    <h3 class="ftext-base font-semibold text-lg text-gray-600">{{ course.score }} / 10</h3>
                 </td>
             </tr>
             <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -172,35 +224,3 @@
 </div>
 
 </template>
-
-<script setup>
-const isDropdownCoursesOpen = ref(false)
-
-const toggleDropdownCourses = () => {
-    isDropdownCoursesOpen.value = !isDropdownCoursesOpen.value
-}
-
-const options = ['PHP 8', 'Laravel', 'Vue 3',];
-const selectedOptions = ref([]);
-
-const toggleOption = (option) => {
-  if (selectedOptions.value.includes(option)) {
-    selectedOptions.value = selectedOptions.value.filter((o) => o !== option);
-  } else {
-    selectedOptions.value.push(option);
-  }
-};
-
-const selectAll = (event) => {
-  if (event.target.checked) {
-    selectedOptions.value = [...options];
-  } else {
-    selectedOptions.value = [];
-  }
-};
-
-const allSelected = ref(false);
-watch(selectedOptions, () => {
-  allSelected.value = selectedOptions.value.length === options.length;
-});
-</script>

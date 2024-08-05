@@ -7,7 +7,7 @@ definePageMeta({
 });
 
 const form = ref({
-    email:      "test@example.com",
+    email:      "gerente@gerente.com",
     password:   'password'
 });
 
