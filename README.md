@@ -62,9 +62,9 @@ bun run dev
 
 ### DEMO
 
-![alt text](https://github.com/carloshperes/training.monitor-fe/blob/training-monitor-fe/1.png?raw=true)
+![Login](https://github.com/carloshperes/training-monitor-fe/blob/master/public/demo/1.png?raw=true)
 
-![alt text](https://github.com/carloshperes/training.monitor-fe/blob/training-monitor-fe/2.png?raw=true)
+![Dashboard](https://github.com/carloshperes/training-monitor-fe/blob/master/public/demo/2.png?raw=true)
 
 ## Licença
 
