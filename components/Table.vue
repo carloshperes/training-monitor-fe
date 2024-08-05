@@ -21,7 +21,10 @@ const loadCoursesEmployees = async () => {
         page.value++;
 
     } catch (error) {
-        console.error("Erro ao carregar os funcionários:", error);
+        throw createError({
+            statusCode: 503,
+            statusMessage: 'Erro ao tentar carregar dados'
+        })
     } finally {
         loading.value = false;
     }

@@ -3,6 +3,8 @@ import type {UseFetchOptions} from "#app";
 
 
 function useBaseApi<T>(path: string, options: UseFetchOptions<T> = {}) {
+
+    const config = useRuntimeConfig();
  
     const headers: any = {}
 
@@ -12,7 +14,7 @@ function useBaseApi<T>(path: string, options: UseFetchOptions<T> = {}) {
         headers["X-XSRF-TOKEN"] = token.value as string;
     }
 
-    return useFetch("http://localhost:8000/" + path, {
+    return useFetch(config.public.apiUrl + path, {
         credentials:    'include',
         watch:          false,
         ...options,

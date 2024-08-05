@@ -11,4 +11,10 @@ export default defineNuxtConfig({
     pageTransition: { name: 'layout', mode: 'out-in' }
   },
   compatibilityDate: '2024-04-03',
+  runtimeConfig: {
+    public: {
+      // Adicione a URL da api de backend
+      apiUrl: 'http://localhost:8000/',
+    }
+  },
 })
