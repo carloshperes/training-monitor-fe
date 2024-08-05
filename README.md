@@ -60,6 +60,12 @@ bun run dev
 
 ### 4. Seu terminal deve mostrar um link `http://localhost:3000`, caso o contrário, copie e cole o link no seu navegador
 
+### DEMO
+
+![alt text](https://github.com/carloshperes/training.monitor-fe/blob/training-monitor-fe/1.png?raw=true)
+
+![alt text](https://github.com/carloshperes/training.monitor-fe/blob/training-monitor-fe/2.png?raw=true)
+
 ## Licença
 
 Este projeto está licenciado sob a [MIT license](https://opensource.org/licenses/MIT).
