@@ -7,7 +7,10 @@ const toggleDropdownCourses = () => {
     isDropdownCoursesOpen.value = !isDropdownCoursesOpen.value
 }
 
-const options = ['PHP 8', 'Laravel', 'Vue 3',];
+console.log(useCourseStore());
+
+const options = [];
+
 const selectedOptions = ref([]);
 
 const toggleOption = (option) => {
@@ -28,18 +31,20 @@ const selectAll = (event) => {
 
 const allSelected = ref(false);
 watch(selectedOptions, () => {
-  allSelected.value = selectedOptions.value.length === options.length;
+    allSelected.value = selectedOptions.value.length === options.length;
 });
 
 
 
 const employees = ref([]);
-const page = ref(1);
-const perPage = ref(10);
-const loading = ref(false);
-const hasMore = ref(true);
+const page      = ref(1);
+const perPage   = ref(10);
+const loading   = ref(false);
+const hasMore   = ref(true);
 
-const loadCourses = async () => {
+const store     = useCourseEmployeeStore();
+
+const loadCoursesEmployees = async () => {
     if (loading.value || !hasMore.value) return;
 
         loading.value = true;
@@ -51,9 +56,6 @@ const loadCourses = async () => {
         page.value++;
 
     } catch (error) {
-        if (error) {
-
-}
         console.error("Erro ao carregar os funcionários:", error);
     } finally {
         loading.value = false;
@@ -63,16 +65,17 @@ const loadCourses = async () => {
 
 const onScroll = () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && hasMore.value) {
-        loadCourses();
+        loadCoursesEmployees();
     }
 };
 
-onMounted(() => {
-    loadCourses();
+onMounted(async () => {
+    await actions.course.fetch();
+    loadCoursesEmployees();
     window.addEventListener('scroll', onScroll);
 });
-const store     = useCourseEmployeeStore();
-const courses   = computed(() => store.courses)
+
+const courses   = computed(() => actions.course.fetch());
 </script>
 
 <template>

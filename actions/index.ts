@@ -1,4 +1,5 @@
 import auth from "./auth";
+import course from "./course";
 import courseEmployee from "./course-employee";
 
 export interface BaseResponse<T> {
@@ -7,6 +8,6 @@ export interface BaseResponse<T> {
 
 export default {
 
-    auth, courseEmployee
+    auth, course, courseEmployee
 
 }

@@ -15,10 +15,15 @@ const toggleDropdown = () => {
 const logout = () => {
     actions.auth.logout();
 }
+
+const user = useAuthStore().user[0];
 </script>
 
 <template>
     <div>
+        <Head>
+            <Title>Training Monitor</Title>
+        </Head>
         <nav class="bg-purple-700 text-white border-gray-200 dark:bg-gray-900">
             <div class="max-w-screen flex items-center p-4">
                 <div class="flex grow items-center">
@@ -42,8 +47,8 @@ const logout = () => {
                         v-if="navbarOpen" 
                         class="absolute top-12 right-1 z-50 my-4 w-[200px] text-base lg-hidden list-none bg-white divide-y divide-gray-100 rounded-sm shadow dark:bg-gray-700 dark:divide-gray-600">
                         <div class="px-4 py-3">
-                            <span class="block text-sm text-gray-900 dark:text-white">Carlos Peres</span>
-                            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">carlos@carlos.com</span>
+                            <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
+                            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ user.email }}</span>
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li @click="logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer">
