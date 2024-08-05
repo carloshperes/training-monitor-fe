@@ -11,8 +11,9 @@ Bem-vindo! Este repositório contém o frontend que precisa da API:
 ```bash
 git clone https://github.com/carloshperes/training-monitor-fe
 cd training-monitor-fe
+```
 
-## Caso seja necessário
+### Caso seja necessário
 
 Você prode trocar o URL da API de backend em nuxt.config.ts
 
