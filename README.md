@@ -6,6 +6,19 @@ Bem-vindo! Este repositório contém o frontend que precisa da API:
 
 ## Para executar o projeto, siga os seguintes passos:
 
+## Caso seja necessário
+
+Você prode trocar o URL da API de backend em nuxt.config.ts
+
+```
+runtimeConfig: {
+    public: {
+        // Adicione a URL da api de backend
+        apiUrl: 'http://localhost:8000/',
+    }
+},
+```
+
 1. Instale as dependências:
 
 
@@ -41,10 +54,6 @@ bun run dev
 
 3. Seu terminal deve mostrar um link `http://localhost:3000`, caso o contrário, copie e cole o link no seu navegador
 
-## Caso seja necessário
-
-4. Você prode trocar o URL da API de backend (você pode encontrar ela aqui: )
-
 ## Licença
 
 Este projeto está licenciado sob a [MIT license](https://opensource.org/licenses/MIT).
@@ -52,4 +61,3 @@ Este projeto está licenciado sob a [MIT license](https://opensource.org/license
 ---
 
 Feito com ❤️ por [Carlos Peres](https://github.com/carloshperes)
-```
