@@ -62,8 +62,10 @@ bun run dev
 
 ### DEMO
 
+Tela de Login
 ![Login](https://github.com/carloshperes/training-monitor-fe/blob/master/public/demo/1.png?raw=true)
 
+Dashboard
 ![Dashboard](https://github.com/carloshperes/training-monitor-fe/blob/master/public/demo/2.png?raw=true)
 
 ## Licença
