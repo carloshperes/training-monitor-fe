@@ -17,7 +17,7 @@ const loadCoursesEmployees = async () => {
         await actions.courseEmployee.fetch(page.value);
 
         employees.value.push(...store.courses.data);
-        hasMore.value = store.courses.data.length === perPage.value;
+        hasMore.value = store.courseEmployee.data.length === perPage.value;
         page.value++;
 
     } catch (error) {
