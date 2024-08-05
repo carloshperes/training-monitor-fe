@@ -6,6 +6,12 @@ Bem-vindo! Este repositório contém o frontend que precisa da API:
 
 ## Para executar o projeto, siga os seguintes passos:
 
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/carloshperes/training-monitor-fe
+cd training-monitor-fe
+
 ## Caso seja necessário
 
 Você prode trocar o URL da API de backend em nuxt.config.ts
@@ -19,8 +25,7 @@ runtimeConfig: {
 },
 ```
 
-1. Instale as dependências:
-
+### 2. Instale as dependencias
 
 ```bash
 # npm
@@ -36,7 +41,7 @@ yarn install
 bun install
 ```
 
-2. Inicie o servidor de desenvolvimento `http://localhost:3000`:
+### 3. Inicie o servidor de desenvolvimento `http://localhost:3000`:
 
 ```bash
 # npm
@@ -52,7 +57,7 @@ yarn dev
 bun run dev
 ```
 
-3. Seu terminal deve mostrar um link `http://localhost:3000`, caso o contrário, copie e cole o link no seu navegador
+### 4. Seu terminal deve mostrar um link `http://localhost:3000`, caso o contrário, copie e cole o link no seu navegador
 
 ## Licença
 
